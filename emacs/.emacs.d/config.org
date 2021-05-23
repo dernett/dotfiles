@@ -1,0 +1,160 @@
+* Emacs
+** Variables
+#+begin_src emacs-lisp
+(setq make-backup-files nil
+      auto-save-default nil
+      create-lockfiles  nil)
+
+(setq inhibit-splash-screen t
+      frame-resize-pixelwise t)
+
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
+#+end_src
+** Theme
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :ensure
+  :init
+  (load-theme 'doom-opera t))
+
+(use-package doom-modeline
+  :ensure
+  :init (doom-modeline-mode 1))
+#+end_src
+* Packages
+** Org Mode
+#+begin_src emacs-lisp
+(use-package org
+  :hook
+  (org-mode . (lambda () (org-indent-mode)))
+  :config
+  (setq org-src-tab-acts-natively t)
+  (setq org-startup-folded t)
+  (setq org-edit-src-content-indentation 0))
+#+end_src
+** Ivy/Counsel
+#+begin_src emacs-lisp
+(use-package ivy
+  :ensure
+  :bind
+  (("C-s" . swiper))
+  :config
+  (ivy-mode 1))
+
+(use-package counsel
+  :ensure
+  :config
+  (counsel-mode 1))
+#+end_src
+** Icons
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure)
+#+end_src
+** Rainbow Delimiters
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :ensure
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
+#+end_src
+** Magit
+#+begin_src emacs-lisp
+(use-package magit
+  :ensure)
+#+end_src
+** LSP
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :ensure
+  :commands lsp
+  :custom
+  (lsp-headerline-breadcrumb-enable nil))
+
+(use-package lsp-ui
+  :ensure
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 0))
+
+(use-package company
+  :ensure
+  :custom
+  (company-idle-delay 0))
+
+(use-package flycheck
+  :ensure)
+
+(use-package yasnippet
+  :ensure
+  :config
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook 'yas-minor-mode))
+#+end_src
+** Modes
+*** Haskell
+#+begin_src emacs-lisp
+(use-package haskell-mode
+  :ensure
+  :custom
+  (haskell-indentation-left-offset 4)
+  (haskell-doc-show-prelude nil))
+
+(use-package lsp-haskell
+  :ensure
+  :hook (haskell-mode . lsp)
+  :custom
+  (lsp-haskell-formatting-provider "brittany"))
+#+end_src
+*** C++
+#+begin_src emacs-lisp
+(add-hook #'c++-mode-hook
+	  (lambda ()
+	    (lsp)
+	    (setq eldoc-idle-delay 0)
+	    (add-hook 'before-save-hook #'lsp-format-buffer nil t)))
+#+end_src
+*** Nix
+#+begin_src emacs-lisp
+(use-package nix-mode
+  :ensure
+  :mode "\\.nix\\'")
+#+end_src
+*** Julia
+#+begin_src emacs-lisp
+(use-package julia-mode
+  :ensure)
+#+end_src
+*** Lean
+#+begin_src emacs-lisp
+(use-package lean-mode
+  :ensure)
+
+(use-package company-lean
+  :ensure)
+#+end_src
+*** YAML
+#+begin_src emacs-lisp
+(use-package yaml-mode
+  :ensure)
+#+end_src
+* Hooks
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+	  (lambda ()
+	    (linum-mode 1)
+	    (hl-line-mode 1)
+	    (electric-pair-local-mode 1)))
+
+(add-hook 'c++-mode-hook
+	  (lambda ()
+	    (c-set-style "stroustrup")
+	    (setq tab-width      4
+		  c-basic-offset 4)))
+#+end_src
