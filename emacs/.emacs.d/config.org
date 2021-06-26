@@ -11,6 +11,8 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
+(setq-default indent-tabs-mode nil)
+
 (setq custom-file (concat user-emacs-directory "custom.el"))
 #+end_src
 ** Theme
@@ -67,7 +69,6 @@
   :ensure)
 #+end_src
 ** LSP
-
 #+begin_src emacs-lisp
 (use-package lsp-mode
   :ensure
@@ -110,9 +111,16 @@
 
 (use-package lsp-haskell
   :ensure
-  :hook (haskell-mode . lsp)
+  :hook
+  (haskell-mode . lsp)
+  (before-save . lsp-format-buffer)
   :custom
   (lsp-haskell-formatting-provider "brittany"))
+#+end_src
+*** Idris
+#+begin_src emacs-lisp
+(use-package idris-mode
+  :ensure)
 #+end_src
 *** C++
 #+begin_src emacs-lisp
@@ -156,6 +164,14 @@
 *** Proof General
 #+begin_src emacs-lisp
 (use-package proof-general
+  :ensure
+  :bind (([f1] . proof-assert-until-point-interactive)
+         ([f2] . proof-assert-next-command-interactive)
+         ([f3] . proof-undo-last-successful-command)))
+#+end_src
+*** Sage
+#+begin_src emacs-lisp
+(use-package sage-shell-mode
   :ensure)
 #+end_src
 * Hooks
