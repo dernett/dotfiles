@@ -67,6 +67,19 @@
     vim emacs wget git firefox
   ];
 
+  services.snapper.configs = {
+    home = {
+      extraConfig = ''
+        ALLOW_USERS="alex"
+        TIMELINE_CREATE=yes
+        TIMELINE_CLEANUP=yes
+      '';
+     subvolume = "/home";
+    };
+  };
+
+  zramSwap.enable = true;
+
   fonts.fonts = with pkgs; [
     noto-fonts noto-fonts-cjk noto-fonts-emoji
     fira-code fira-code-symbols
