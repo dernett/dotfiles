@@ -17,6 +17,7 @@ end = [
 margin_ends = 0
 position = "top"
 radius = 0
+shadow = false
 start = [ "launcher", "control-center", "wallpaper", "workspaces", "active_window" ]
 
 [idle]
