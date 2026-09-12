@@ -1,0 +1,4 @@
+export QT_QPA_PLATFORMTHEME=lxqt
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="$HOME/.elan/bin:$PATH"
