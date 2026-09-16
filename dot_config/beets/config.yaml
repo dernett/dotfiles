@@ -1,0 +1,14 @@
+directory: /mnt/archive/Media/Music/Discography
+
+paths:
+    default: $albumartist/$album%aunique{}/$track $title
+    singleton: $artist/Singles/$title
+    # singleton: Non-Album/$artist/$title
+    comp: Compilations/$album%aunique{}/$track $title
+
+plugins: musicbrainz spotify replaygain fetchart
+
+replaygain:
+    backend: ffmpeg
+    r128_targetlevel: 89
+
