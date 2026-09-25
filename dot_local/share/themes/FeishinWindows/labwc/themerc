@@ -1,0 +1,113 @@
+# FeishinWindows - a labwc theme reproducing Feishin's "Windows" window bar
+#
+# Source of truth:
+#   feishin/src/renderer/layouts/window-bar.tsx
+#   feishin/src/renderer/layouts/window-bar.module.css
+#   feishin/src/shared/themes/default.ts          (Default Dark palette)
+#
+# Palette (Feishin Default Dark):
+#   background      rgb(12,12,12)    #0c0c0c
+#   foreground      rgb(225,225,225) #e1e1e1
+#   surface         rgb(20,20,20)    #141414
+#   state-error     rgb(204,50,50)   #cc3232
+#   primary         rgb(53,116,252)  #3574fc
+#   border          rgb(255,255,255) at 10%, halved by alpha() to 5%
+#
+# Read README.md for the five properties that cannot be reproduced exactly.
+# This file must be paired with the rc.xml settings in rc.xml.snippet;
+# titlebar layout, corner radius, shadows and font live there, not here.
+
+# --- geometry -----------------------------------------------------------
+# Feishin's bar is 30px tall with no padding. labwc derives titlebar height
+# from max(font height, button height) + 2 * vertical padding, so a 30px
+# button height with zero padding yields a 30px titlebar.
+window.titlebar.padding.width: 0
+window.titlebar.padding.height: 0
+
+# Feishin: a 130px group of three flex:1 buttons, i.e. 43.333px each.
+# labwc parses button width with atoi(), so 43 is the closest integer.
+window.button.width: 43
+window.button.height: 30
+window.button.spacing: 0
+
+# Feishin's app icon is 16x16, but labwc sizes the window icon from the button
+# it sits in, so by default it fills all 30px of the bar. This key is added by
+# patches/0001-theme-add-window.button.icon.size.patch. Stock labwc ignores
+# themerc keys it does not recognise, so leaving it here is harmless on an
+# unpatched build; the icon just stays 30px.
+window.button.icon.size: 16
+
+# --- window border ------------------------------------------------------
+# Feishin draws a 1px line under the bar only, in the border colour at 50%
+# alpha: rgb(255 255 255 / 10%) halved is 5%, i.e. #ffffff0d.
+# labwc has no titlebar underline, so the same line is drawn as a window
+# border on all four sides instead. Set border.width to 0 to drop it.
+border.width: 1
+window.active.border.color: #ffffff0d
+window.inactive.border.color: #ffffff0d
+window.active.indicator.toggled-keybind.color: #ffffff0d
+
+# --- titlebar -----------------------------------------------------------
+# Feishin's bar has no unfocused state, so active and inactive are identical.
+window.active.title.bg: Solid
+window.active.title.bg.color: #0c0c0c
+window.inactive.title.bg: Solid
+window.inactive.title.bg.color: #0c0c0c
+
+window.active.label.text.color: #e1e1e1
+window.inactive.label.text.color: #e1e1e1
+window.label.text.justify: Left
+
+# --- titlebar buttons ---------------------------------------------------
+# The PNGs alongside this file carry their own backgrounds, including the
+# grey hover fill and the red close hover, so the hover overlay below never
+# applies to iconify, max or close. It is kept for menu/shade/desk, which
+# Feishin has no counterpart for and which this theme ships no images for.
+window.button.hover.bg.color: #7d7d7d4d
+window.button.hover.bg.corner-radius: 0
+
+# Only consulted for xbm buttons; the shipped PNGs are already coloured.
+window.active.button.unpressed.image.color: #e1e1e1
+window.inactive.button.unpressed.image.color: #e1e1e1
+
+# --- drop shadows -------------------------------------------------------
+# Feishin's bar is drawn inside the window and casts nothing.
+window.active.shadow.size: 0
+window.inactive.shadow.size: 0
+
+# --- menus, OSD ---------------------------------------------------------
+# EXTRAPOLATED. Feishin's window bar has no menu or on-screen display, so
+# nothing below is a reproduction of anything. These use Feishin's surface,
+# foreground and primary colours so the rest of the compositor does not fall
+# back to the light openbox defaults. Delete this section if you would
+# rather theme menus separately.
+menu.border.width: 1
+menu.border.color: #ffffff0d
+menu.items.padding.x: 7
+menu.items.padding.y: 4
+menu.items.bg.color: #141414
+menu.items.text.color: #d7d7d7
+menu.items.active.bg.color: #3574fc
+menu.items.active.text.color: #ffffff
+menu.separator.width: 1
+menu.separator.padding.width: 6
+menu.separator.padding.height: 3
+menu.separator.color: #ffffff1a
+menu.title.bg.color: #080808
+menu.title.text.color: #969696
+menu.title.text.justify: Left
+
+osd.bg.color: #141414
+osd.border.width: 1
+osd.border.color: #ffffff0d
+osd.label.text.color: #e1e1e1
+osd.window-switcher.style-classic.item.active.border.color: #3574fc
+osd.window-switcher.style-classic.item.active.bg.color: #3574fc26
+osd.window-switcher.style-thumbnail.item.active.border.color: #3574fc
+osd.window-switcher.style-thumbnail.item.active.bg.color: #3574fc26
+osd.workspace-switcher.boxes.border.width: 1
+
+snapping.overlay.region.bg.color: #3574fc4d
+snapping.overlay.edge.bg.color: #3574fc4d
+
+magnifier.border.color: #3574fc
