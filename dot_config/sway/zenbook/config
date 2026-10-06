@@ -1,0 +1,9 @@
+### Output configuration
+#
+output * scale 1.50
+# output * scale 1.6666666269302368
+
+# Enable HDR on the built-in display (BT2020 primaries + PQ transfer).
+# Requires the Vulkan renderer (WLR_RENDERER=vulkan); render_bit_depth is
+# implicitly raised to 10 when HDR is on.
+# output eDP-1 hdr on
