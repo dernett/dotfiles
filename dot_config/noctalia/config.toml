@@ -40,9 +40,15 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     # command = "wlopm --off '*'"
     # resume_command = "wlopm --on '*'"
 
+[lockscreen]
+transition = []
+
 [osd.kinds]
 keyboard_layout = false
 media = false
+
+[shell.animation]
+enabled = false
 
 [shell.panel]
 open_near_click_control_center = true
