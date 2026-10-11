@@ -1,0 +1,60 @@
+/*
+ * Ghostty tab size overrides (GTK4 / libadwaita AdwTabBar).
+ * Loaded via `gtk-custom-css = tabs.css` in config.ghostty.
+ *
+ * libadwaita defaults are noted next to each value. Tweak the numbers,
+ * then open a new Ghostty window to see the change.
+ * Live-tweak with: GTK_DEBUG=interactive ghostty
+ */
+
+/* --- Tab height ------------------------------------------------------- */
+
+/* The strip that holds the tabs (default: padding 6px/3px, min-height 34px) */
+tabbar tabbox {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  min-height: 0;
+}
+
+/* Each tab (default: min-height 26px, padding 4px) */
+tabbar tab {
+  min-height: 27px;
+  padding: 2px 6px;
+  border-radius: 6px;          /* default: 9px */
+}
+
+/* Tab title text */
+tabbar tab label {
+  font-size: 0.9em;
+}
+
+/* Close button / icon inside each tab (default: 24x24) - must shrink too,
+   otherwise it props the tab open */
+tabbar tab button.image-button {
+  min-width: 18px;
+  min-height: 18px;
+}
+
+/* "New tab" / tab overview buttons at the ends of the bar (default: 6px 5px) */
+tabbar .start-action,
+tabbar .end-action {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+tabbar .start-action button,
+tabbar .end-action button {
+  min-height: 20px;
+  min-width: 20px;
+  padding: 2px;
+}
+
+/* --- Tab width -------------------------------------------------------- */
+/* Tabs have a minimum width enforced in libadwaita's code, so CSS can only
+   make them WIDER. Set `gtk-wide-tabs = false` in config.ghostty to stop
+   tabs stretching across the whole bar. Uncomment to force a wider minimum: */
+/*
+tabbar tab {
+  min-width: 200px;
+}
+*/
