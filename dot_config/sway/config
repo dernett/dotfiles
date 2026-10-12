@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term ghostty
+set $term ghostty +new-window
 # Your preferred application launcher
 set $menu wmenu-run
 
@@ -270,3 +270,6 @@ bindsym $mod+r mode "resize"
 # }
 
 include /etc/sway/config.d/*
+
+# exec_always systemctl --user start sway-session.target
+exec_always systemctl --user start app-com.mitchellh.ghostty.service
