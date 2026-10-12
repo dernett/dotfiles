@@ -1,3 +1,6 @@
 font-family = "JetBrainsMonoNL Nerd Font"
+font-size = 10
 
 gtk-custom-css = tabs.css
+
+quit-after-last-window-closed = false
