@@ -27,6 +27,7 @@ default_border pixel 2
 default_floating_border pixel 2
 
 exec noctalia
+exec fcitx5 -d
 
 ### Output configuration
 #
@@ -90,6 +91,7 @@ input type:keyboard {
     bindsym $mod+d exec $ipc panel-toggle launcher
     bindsym $mod+c exec $ipc panel-toggle control-center
     bindsym $mod+comma exec $ipc settings-toggle
+    bindsym $mod+Escape exec $ipc session lock
 
 # Start a terminal
     bindsym $mod+Return exec $term
